@@ -25,6 +25,7 @@ site/                       the deployed site (no build step)
   assets/                   self-hosted Archivo font, vendored qrcode.min.js, favicon
 scripts/serve.mjs           local preview under the production headers
 infra/main.bicep            the Azure Static Web App (booklab-web-demo)
+docs/SYSTEM-DOCUMENTATION.md  full documentation: architecture, security evidence, operations
 .github/workflows/deploy.yml
 ```
 
