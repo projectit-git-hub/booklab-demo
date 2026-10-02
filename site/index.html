@@ -58,6 +58,8 @@
         <h2 class="step-title" id="h-step1" tabindex="-1">Which service would you like?</h2>
         <p class="step-sub">All appointments are at our Queenstown clinic.</p>
         <div id="svcList" class="svc-list"></div>
+        <p class="notice" data-notice role="alert" hidden></p>
+        <div class="back-row"><button type="button" class="btn btn-primary js-cta step-cta"></button></div>
       </section>
 
       <!-- Step 2: date and time -->
@@ -73,7 +75,12 @@
           <button type="button" class="link-btn" data-go="1">Change service</button>
         </div>
 
-        <div class="card cal-card">
+        <button type="button" class="next-avail" id="nextAvail">
+          <span><span class="na-lbl">Next available appointment</span><span class="na-val" id="nextAvailVal"></span></span>
+          <span class="na-go">Choose this time</span>
+        </button>
+
+        <div class="card cal-card" id="calCard">
           <div class="cal-head">
             <p class="cal-hint" id="calHint">Choose an available day</p>
             <div class="cal-nav">
@@ -90,8 +97,8 @@
             <div class="cal-month cal-month-2"><h3 id="calMonth1"></h3><div class="cal-grid" id="calGrid1"></div></div>
           </div>
           <div class="cal-key">
-            <span><i class="key-dot"></i>Times available</span>
-            <span><i class="key-off"></i>Unavailable</span>
+            <span><i class="key-on"></i>Available</span>
+            <span><i class="key-off">12</i>Not available</span>
           </div>
 
           <div class="slots" id="slots" hidden>
@@ -108,7 +115,8 @@
           </div>
         </div>
 
-        <div class="back-row"><button type="button" class="btn btn-ghost" data-go="1">Back</button></div>
+        <p class="notice" data-notice role="alert" hidden></p>
+        <div class="back-row"><button type="button" class="btn btn-ghost" data-go="1">Back</button><button type="button" class="btn btn-primary js-cta step-cta"></button></div>
       </section>
 
       <!-- Step 3: details -->
@@ -161,12 +169,19 @@
             </div>
           </div>
 
-          <div class="field field-narrow" id="f-dob">
-            <label class="label" for="dob">Date of birth <span class="opt">needed for your clinical record</span></label>
-            <input id="dob" placeholder="DD/MM/YYYY" inputmode="numeric" autocomplete="bday" maxlength="10" aria-describedby="h-dob e-dob">
-            <p class="hint" id="h-dob">Just type the numbers and the slashes are added for you</p>
-            <p class="errmsg" id="e-dob">Please enter your full date of birth as DD/MM/YYYY</p>
-          </div>
+          <fieldset class="field dob" id="f-dob">
+            <legend class="label">Date of birth <span class="opt">needed for your clinical record</span></legend>
+            <div class="dob-row">
+              <div class="dob-part"><label for="dobD">Day</label><input id="dobD" inputmode="numeric" autocomplete="bday-day" maxlength="2" placeholder="DD" aria-describedby="e-dob"></div>
+              <div class="dob-part"><label for="dobM">Month</label><input id="dobM" inputmode="numeric" autocomplete="bday-month" maxlength="2" placeholder="MM" aria-describedby="e-dob"></div>
+              <div class="dob-part dob-year"><label for="dobY">Year</label><input id="dobY" inputmode="numeric" autocomplete="bday-year" maxlength="4" placeholder="YYYY" aria-describedby="e-dob"></div>
+            </div>
+            <p class="errmsg" id="e-dob">Please enter your date of birth, for example 14 03 1952</p>
+            <button type="button" class="dob-btn" id="dobBtn" aria-haspopup="dialog">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+              <span>Or choose it without typing</span>
+            </button>
+          </fieldset>
 
           <div class="field">
             <label class="label" for="notes">Anything we should know? <span class="opt">optional</span></label>
@@ -181,7 +196,8 @@
           <button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true">Review booking</button>
         </form>
 
-        <div class="back-row"><button type="button" class="btn btn-ghost" data-go="2">Back</button></div>
+        <p class="notice" data-notice role="alert" hidden></p>
+        <div class="back-row"><button type="button" class="btn btn-ghost" data-go="2">Back</button><button type="button" class="btn btn-primary js-cta step-cta"></button></div>
       </section>
 
       <!-- Step 4: review -->
@@ -218,7 +234,8 @@
 
         <p class="fine">Payment is taken at the clinic on the day, so there is nothing to pay now. Free cancellation up to 24 hours before your appointment.</p>
 
-        <div class="back-row"><button type="button" class="btn btn-ghost" data-go="3">Back</button></div>
+        <p class="notice" data-notice role="alert" hidden></p>
+        <div class="back-row"><button type="button" class="btn btn-ghost" data-go="3">Back</button><button type="button" class="btn btn-primary js-cta step-cta"></button></div>
       </section>
 
       <!-- Step 5: confirmed -->
@@ -256,7 +273,7 @@
       </dl>
       <div class="sum-total"><span>Total</span><span class="amt" id="sPrice">$0</span></div>
       <p class="sum-note">Pay at the clinic on the day. Free cancellation up to 24 hours before.</p>
-      <button type="button" class="btn btn-primary js-cta sum-cta" disabled>Choose a service to continue</button>
+      <button type="button" class="btn btn-primary js-cta sum-cta"></button>
 
       <div class="by-phone">
         <strong>Prefer to book by phone?</strong>
@@ -288,9 +305,22 @@
   </footer>
 </div>
 
+<dialog class="dob-dialog" id="dobDialog" aria-labelledby="dobTitle">
+  <div class="dd-head">
+    <h2 id="dobTitle">Date of birth</h2>
+    <button type="button" class="dd-close" id="dobClose" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <p class="dd-crumb" id="dobCrumb"></p>
+  <p class="dd-step" id="dobStep" aria-live="polite"></p>
+  <div class="dd-grid" id="dobGrid"></div>
+  <div class="dd-foot"><button type="button" class="btn btn-ghost" id="dobBack">Back</button></div>
+</dialog>
+
 <div class="action-bar" id="actionBar">
   <div class="action-sum" id="barSummary">Choose a service</div>
-  <button type="button" class="btn btn-primary js-cta" disabled>Continue</button>
+  <button type="button" class="btn btn-primary js-cta">Continue</button>
 </div>
 
 <script src="/assets/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous"></script>
