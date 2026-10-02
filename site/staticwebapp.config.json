@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemas.azure.com/static-web-apps/1.0.0/staticwebapp.config.json",
+  "globalHeaders": {
+    "X-Robots-Tag": "noindex, nofollow, noarchive",
+    "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Cross-Origin-Resource-Policy": "same-origin",
+    "Cross-Origin-Embedder-Policy": "require-corp",
+    "X-XSS-Protection": "0",
+    "X-Permitted-Cross-Domain-Policies": "none",
+    "X-DNS-Prefetch-Control": "off",
+    "X-Download-Options": "noopen",
+    "Origin-Agent-Cluster": "?1",
+    "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+  },
+  "responseOverrides": {
+    "404": { "rewrite": "/index.html" }
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/robots.txt", "*.{css,js,png,jpg,jpeg,gif,svg,ico,woff,woff2,txt}"]
+  }
+}

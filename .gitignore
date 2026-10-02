@@ -1,0 +1,19 @@
+# Secrets: never commit these
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*credentials*
+*secrets*
+
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Tooling
+node_modules/
+.claude/
