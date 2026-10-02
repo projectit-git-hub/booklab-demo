@@ -22,6 +22,6 @@
   },
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/robots.txt", "*.{css,js,png,jpg,jpeg,gif,svg,ico,woff,woff2,txt}"]
+    "exclude": ["/robots.txt", "/.well-known/*", "*.{css,js,png,jpg,jpeg,gif,svg,ico,woff,woff2,txt}"]
   }
 }

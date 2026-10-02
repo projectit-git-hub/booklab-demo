@@ -1,0 +1,5 @@
+Contact: mailto:hello@booklab.co.nz
+Expires: 2027-07-31T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://demo.booklab.co.nz/.well-known/security.txt
+Policy: https://booklab.co.nz/security/disclosure/
