@@ -14,7 +14,7 @@ A public demonstration of a Book Lab online booking page, for prospective clinic
 | Azure hostname | https://wonderful-mud-0d4dc2000.3.azurestaticapps.net |
 | Went live | 2 October 2026 |
 | Repository | `projectit-git-hub/booklab-demo` (private, `main` = production) |
-| Local working copy | `C:\Users\DominicZolezziProjec\dev\booklab-demo` (never inside OneDrive) |
+| Local working copy | `Project IT - AI Agents\Booklab Demo` (OneDrive; git is set to `windows.appendAtomically false` to cope with sync) |
 
 ## 2. What it is, and is not
 
